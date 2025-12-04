@@ -1,23 +1,39 @@
+[![Email](https://img.shields.io/badge/Email-zfssen@gmail.com-red?logo=gmail&style=for-the-badge)](mailto:zfssen@gmail.com) &nbsp; [![Phone](https://img.shields.io/badge/Phone-15841062437-green?logo=whatsapp&style=for-the-badge)](tel:15841062437) &nbsp; <a href="http://wpa.qq.com/msgrd?v=3&uin=2787290369&site=qq&menu=yes" style="text-decoration:none;vertical-align:middle;display:inline-flex;box-shadow:none;"><span style="background:#555555;color:white;padding:6px 10px;font-family:sans-serif;font-weight:bold;font-size:11px;text-transform:uppercase;letter-spacing:1px;border-top-left-radius:3px;border-bottom-left-radius:3px;"><i class="fab fa-qq" style="margin-right:4px;color:#12B7F5;"></i>QQ</span><span style="background:#54C7FC;color:white;padding:6px 10px;font-family:sans-serif;font-weight:bold;font-size:11px;letter-spacing:1px;border-top-right-radius:3px;border-bottom-right-radius:3px;">2787290369</span></a>
 
-[![bruceqd](https://img.shields.io/badge/bruceqd-github-blue?logo=github)](https://github.com/bruceqd)
+2004年生人，汉族，男，中共预备党员；
 
-<strong>喜爱做有趣的、有挑战的数据挖掘竞赛</strong>，曾在<strong>KDD CUP</strong>、<strong>WSDM CUP</strong>、<strong>CIKM AnalytiCup</strong>、CCF BDCI等国内外数据挖掘竞赛取得<strong>冠军</strong>、<strong>亚军</strong>、<strong>季军</strong>等优异成绩。近期主要做Kaggle比赛，现为[[Kaggle Expert]](https://www.kaggle.com/bruceqdu) (在Kaggle Competitions排名968/205618)。
+本科就读于**哈尔滨工程大学**（211），保研至**厦门大学**（985）攻读**人工智能**硕士学位；
 
-[[知乎]](https://www.zhihu.com/people/bruceqd/columns) (”<strong>数据挖掘竞赛经历</strong>"专栏讲解竞赛故事)
+本科期间专业成绩 **93.04**，排名 **9/158** (前6%)，曾获**国家奖学金**、**三好学生**等荣誉；
 
-[[B站]](https://space.bilibili.com/484226629) (视频主要讲解有关数据挖掘竞赛的技术和知识)
+我对大模型充满热情，在算法竞赛和项目开发方面有经验，授权四项软件著作权；
 
-青岛大学计算机科学技术学院教师，主持山东省自然科学基金、山东省高校科技计划，参与多项国家省市级项目。在Advanced Intelligent System、Bioinformatics、BMC Bioinformatcis、Computational and Structural Biotechnology Journal、Statistics in Medicine、Statistical Methods in Medical Research、Physica A、Physics Letters A 等国内外知名期刊发表论文几十篇，授权专利2项。与学生一同参加KDD CUP、WSDM CUP、CIKM AnalytiCup、CCF BDCI等国内外数据挖掘竞赛取得冠军、亚军、季军等优异成绩。受邀为阿里云天池AI实训平台制作“蚂蚁金服资金流入流出预测挑战赛”在线课程[[B站视频]](https://www.bilibili.com/video/BV1NZaVeWErB/?spm_id_from=333.999.0.0&vd_source=15730864f5ddc7670b55acf7991915a3)。主讲大数据分析方法、面向对象程序设计、编译原理等本科生课程，生物信息学、计算机科学前沿等研究生课程。
+曾在 ACM、计算机设计大赛等国家级竞赛中获奖，累计获得计算机相关省级以上竞赛奖项20余项；（ICPC是铁牌，非常伤心，我真菜呜呜呜）
 
-#### Email
-wushunyao[at]qdu.edu.cn
+目前还没有发表过论文，励志发表CCF-B/A类会议；
 
+喜欢玩王者荣耀；
+
+---
 
 #### Education
-2011-2014, 青岛大学, 系统理论, 博士\
-2008-2010, 青岛理工大学, 计算机软件与理论, 硕士\
-2004-2008, 青岛理工大学, 计算机科学与技术, 学士
 
-#### Research Interests
-数据挖掘, 复杂网络, 深度学习, 生物信息学, 微生物组学, 推荐系统, 智能交通
+- **2026 - future**: **厦门大学** (Xiamen University), **人工智能**, 硕士
+- **2022 - 2026**:  **哈尔滨工程大学** (Harbin Engineering University), **计算机科学与技术**, 本科
 
+---
+
+#### Skills
+
+- **Languages**: Python, C/C++, Java
+- **Web Development**: Django, Vue.js (Full Stack)
+- **AI & ML**: Transformer, Self-Attention, LLM Fine-tuning (LoRA), RAG, LangChain
+- **Tools & Systems**: MySQL, Linux, Git
+
+---
+
+#### Experience & Self-Evaluation
+
+- **教学经验**: 曾在北京玄武技科技有限公司担任信息学竞赛讲师，指导学生获 CSP-J/S 省级奖项 30+ 人次。
+- **学生工作**: 任哈尔滨工程大学计算机学院科协副主席，负责技术比赛组织与宣传。
+- **个人特质**: 性格开朗，具备良好的团队协作能力和执行力。累计志愿服务时长 100+ 小时。

@@ -1,112 +1,339 @@
 @import "./styles.css";
 
-
-:root{
-    --h-title-color:#3948d2;
+:root {
+    --primary-color: #2563eb;       /* 科技蓝 - 核心主色 */
+    --primary-dark: #1e40af;        /* 深蓝 - 强调色 */
+    --accent-color: #3b82f6;        /* 亮蓝 - 装饰色 */
+    --text-main: #1f2937;           /* 深灰 - 正文 */
+    --text-light: #6b7280;          /* 浅灰 - 辅助信息 */
+    --bg-body: #f8fafc;             /* 极淡的蓝灰色背景，比纯白更有质感 */
+    --bg-white: #ffffff;            /* 卡片背景 */
+    --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    --card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --border-radius: 16px;          /* 更圆润的圆角 */
 }
 
-.header {
-    border-bottom: solid 2px var(--bs-blue);
-    z-index: 10000;
-}
-
-.bg-bottom {
-    background-color: var(--h-title-color);
-}
-
-.top-section {
-    position: relative;
-    padding: 10rem 0;
-    background-position: center;
-    background-size: cover;
-    height: 25rem;
-}
-
-.top-section h2 {
-    font-weight: 400;
-}
-
-.top-section .top-section-content {
-    position: relative;
-    z-index: 1;
-}
-
-.top-section:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-section header h2{
-    font-family: "Kanit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
-    color: var(--h-title-color);
-    font-size: 2.3rem;
-    line-height: 4rem;
-}
-
-section .main-body{
-    font-size: 1.3rem;
-    font-weight: 200;
-    line-height: 2.4rem;
-}
-
-
-.bg-gradient-primary-to-secondary-light {
-    background: linear-gradient(45deg, #fcfcfc, #ffffff) !important;
-}
-
-.bg-gradient-primary-to-secondary-gray {
-    background: linear-gradient(45deg, #f0f0f0, #f1f1f1) !important;
-}
-
-
-
-.on-top {
-    position: relative;
-    z-index: 10000;
-}
-
-.top-bg {
-    background-position: center;
-    background-size: fill;
-    width: 100%;
-    height: 100%;
-}
-
-.top-bg::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-}
-
-
-#avatar {
-    position: relative;
-    height: 0;
-    top:min(-65px,max(-100px,calc(-1*100vw/12)));
-    max-width: 55em;
-    margin: 0 1.5rem 0 0;
-    float: right;
-    z-index: 9000;
-}
-
-#avatar img {
-    height: max(130px,min(200px,calc(100vw/6)));
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-}
-
-@media screen and (max-width: 991px) {
-    #avatar {
-        margin: 0;
+/* --- Global Animations --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 30px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
     }
 }
 
+body {
+    font-family: 'Mulish', 'PingFang SC', 'Microsoft YaHei', sans-serif; /* 增加中文字体优先支持 */
+    color: var(--text-main);
+    background-color: var(--bg-body);
+    line-height: 1.7; /* 增加行高，提升阅读体验 */
+}
 
+/* --- Navigation --- */
+.header {
+    border-bottom: none;
+    background: rgba(255, 255, 255, 0.85); /* 更通透的玻璃拟态 */
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    color: var(--primary-color) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    color: var(--text-main) !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem !important;
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+    background: rgba(37, 99, 235, 0.05); /* 悬停时的微弱背景 */
+}
+
+/* --- Top Section --- */
+.top-section {
+    position: relative;
+    padding: 8rem 0 4rem; /* 保持适度空间 */
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* 文字阴影 - 确保背景图上文字清晰 */
+.top-section h2 {
+    color: white !important;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3); /* 强阴影 */
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-align: center; /* Force text alignment */
+    width: 100%; /* Ensure it takes full width to center properly */
+    margin: 0 auto; /* Center the element itself */
+    display: block; /* Changing from flex to block to simplify text centering */
+}
+
+/* --- Avatar --- */
+#avatar {
+    position: relative;
+    margin-top: -40px; /* Reduced pull-up to avoid text overlap */
+    margin-bottom: 1rem;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+}
+
+#avatar img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid var(--bg-white); /* 加粗白色边框 */
+    box-shadow: var(--card-shadow);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 弹性动画 */
+}
+
+#avatar img:hover {
+    transform: scale(1.08) rotate(3deg);
+}
+
+/* --- Typography & Sections --- */
+section {
+    padding: 1.5rem 0; /* 紧凑而舒适的间距 */
+}
+
+section header h2 {
+    font-family: 'Kanit', sans-serif !important;
+    color: var(--primary-dark);
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* 标题下方的装饰线 */
+section header h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.6;
+}
+
+section header h2 i {
+    margin-right: 0.8rem;
+    color: var(--primary-color);
+}
+
+/* --- Home Section --- */
+#home-md {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center; /* 个人介绍居中 */
+    animation: fadeInUp 0.8s ease-out; /* 入场动画 */
+}
+
+#home-md p {
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+}
+
+/* 徽章容器 */
+#home-md p:first-child {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Home Section List Styling - No bullets, centered */
+#home-md ul {
+    padding: 0;
+    list-style: none;
+    margin: 0 auto 2rem;
+    max-width: 800px;
+}
+
+#home-md li {
+    list-style: none;
+    margin-bottom: 0.5rem;
+}
+
+/* --- Project Cards --- */
+.project-card {
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    padding: 2.5rem 2rem;
+    margin-bottom: 2rem;
+    border: none;
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s ease;
+    text-align: center;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease-out backwards; /* 动画 */
+}
+
+/* 卡片顶部的彩色条装饰 */
+.project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.project-card h3 {
+    font-size: 1.6rem;
+    color: var(--text-main);
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    display: inline-block;
+}
+
+.project-card em {
+    display: block;
+    color: var(--text-light);
+    font-style: normal;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    background: #f1f5f9; /* 浅灰色背景胶囊 */
+    display: inline-block;
+    padding: 0.2rem 1rem;
+    border-radius: 20px;
+}
+
+.project-card p {
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #4b5563;
+}
+
+/* 项目列表优化 */
+.project-card ul {
+    padding: 0;
+    margin: 1rem auto 0;
+    display: inline-block;
+    text-align: left;
+    max-width: 800px;
+}
+
+.project-card li {
+    margin-bottom: 0.8rem;
+    list-style: none;
+    position: relative;
+    padding-left: 1.6rem;
+    color: var(--text-main);
+}
+
+.project-card li::before {
+    content: "\f00c"; /* FontAwesome Check Icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-size: 1rem;
+    top: 2px;
+}
+
+/* --- Awards Cards --- */
+.award-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* 自适应双列 */
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    animation: fadeInUp 1s ease-out backwards;
+}
+
+.award-item {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    height: 100%;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    border-left: 5px solid #f59e0b; /* 金色左边框 */
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.award-item:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: var(--card-hover-shadow);
+    background: white;
+}
+
+/* --- Footer --- */
+.bg-bottom {
+    background-color: #0f172a; /* 深邃蓝黑 */
+    color: #94a3b8;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    margin-top: 4rem;
+}
+
+.bg-bottom a {
+    color: white;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.bg-bottom a:hover {
+    opacity: 1;
+    text-decoration: none;
+}
+
+/* --- Responsive --- */
+@media screen and (max-width: 768px) {
+    .award-list {
+        grid-template-columns: 1fr; /* 手机端单列 */
+    }
+    
+    .top-section {
+        padding: 6rem 0 3rem;
+    }
+    
+    section header h2 {
+        font-size: 1.8rem;
+    }
+}

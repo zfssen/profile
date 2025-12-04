@@ -2,7 +2,7 @@
 
 const content_dir = 'contents/'
 const config_file = 'config.yml'
-const section_names = ['home', 'publications', 'awards']
+const section_names = ['home', 'projects', 'awards']
 
 
 window.addEventListener('DOMContentLoaded', event => {
@@ -31,7 +31,8 @@ window.addEventListener('DOMContentLoaded', event => {
 
 
     // Yaml
-    fetch(content_dir + config_file)
+    const timestamp = new Date().getTime();
+    fetch(content_dir + config_file + '?t=' + timestamp)
         .then(response => response.text())
         .then(text => {
             const yml = jsyaml.load(text);
@@ -50,14 +51,52 @@ window.addEventListener('DOMContentLoaded', event => {
     // Marked
     marked.use({ mangle: false, headerIds: false })
     section_names.forEach((name, idx) => {
-        fetch(content_dir + name + '.md')
+        fetch(content_dir + name + '.md?t=' + timestamp)
             .then(response => response.text())
             .then(markdown => {
                 const html = marked.parse(markdown);
-                document.getElementById(name + '-md').innerHTML = html;
+                const container = document.getElementById(name + '-md');
+                container.innerHTML = html;
+                
+                // Post-processing for beautification
+                if (name === 'projects') {
+                    // Wrap projects in cards
+                    const children = Array.from(container.children);
+                    const newContainer = document.createElement('div');
+                    let currentCard = null;
+                    
+                    children.forEach(child => {
+                        if (child.tagName === 'H3') {
+                            currentCard = document.createElement('div');
+                            currentCard.className = 'project-card shadow-sm';
+                            newContainer.appendChild(currentCard);
+                        }
+                        if (currentCard) {
+                            currentCard.appendChild(child);
+                        } else {
+                            // Content before the first H3 (if any)
+                            newContainer.appendChild(child);
+                        }
+                    });
+                    if (newContainer.children.length > 0) {
+                        container.innerHTML = '';
+                        container.appendChild(newContainer);
+                    }
+                } else if (name === 'awards') {
+                    // Style the awards list
+                    const uls = container.querySelectorAll('ul');
+                    uls.forEach(ul => {
+                        ul.className = 'award-list';
+                        const lis = ul.querySelectorAll('li');
+                        lis.forEach(li => {
+                            li.innerHTML = '<div class="award-item shadow-sm">' + li.innerHTML + '</div>';
+                        });
+                    });
+                }
+
             }).then(() => {
                 // MathJax
-                MathJax.typeset();
+                if (window.MathJax) MathJax.typeset();
             })
             .catch(error => console.log(error));
     })
