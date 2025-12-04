@@ -1,6 +1,6 @@
 [![Email](https://img.shields.io/badge/Email-zfssen@gmail.com-red?logo=gmail&style=for-the-badge)](mailto:zfssen@gmail.com) &nbsp; [![Phone](https://img.shields.io/badge/Phone-15841062437-green?logo=whatsapp&style=for-the-badge)](tel:15841062437) &nbsp; <a href="http://wpa.qq.com/msgrd?v=3&uin=2787290369&site=qq&menu=yes" style="text-decoration:none;vertical-align:middle;display:inline-flex;box-shadow:none;"><span style="background:#555555;color:white;padding:6px 10px;font-family:sans-serif;font-weight:bold;font-size:11px;text-transform:uppercase;letter-spacing:1px;border-top-left-radius:3px;border-bottom-left-radius:3px;"><i class="fab fa-qq" style="margin-right:4px;color:#12B7F5;"></i>QQ</span><span style="background:#54C7FC;color:white;padding:6px 10px;font-family:sans-serif;font-weight:bold;font-size:11px;letter-spacing:1px;border-top-right-radius:3px;border-bottom-right-radius:3px;">2787290369</span></a>
 
-2004年生人，汉族，男，中共预备党员；
+2004年魔童成功降世，汉族，男，中共预备党员；
 
 本科就读于**哈尔滨工程大学**（211），保研至**厦门大学**（985）攻读**人工智能**硕士学位；
 
