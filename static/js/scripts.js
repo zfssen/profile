@@ -323,6 +323,203 @@ function initSmoothScroll() {
 }
 
 /* ============================================
+   HOME POST-PROCESSING
+   ============================================ */
+function processHome(container) {
+    const children = Array.from(container.children);
+    const wrapper = document.createElement('div');
+    wrapper.className = 'home-wrapper';
+
+    // Split content by <hr> into sections
+    let currentBlock = document.createElement('div');
+    const blocks = [];
+
+    children.forEach(child => {
+        if (child.tagName === 'HR') {
+            if (currentBlock.children.length > 0) blocks.push(currentBlock);
+            currentBlock = document.createElement('div');
+        } else {
+            currentBlock.appendChild(child);
+        }
+    });
+    if (currentBlock.children.length > 0) blocks.push(currentBlock);
+
+    // Block 0: Intro (badges + text)
+    if (blocks[0]) {
+        const introCard = document.createElement('div');
+        introCard.className = 'home-intro-card';
+        introCard.innerHTML = blocks[0].innerHTML;
+        wrapper.appendChild(introCard);
+    }
+
+    // Block 1: Education -> Timeline
+    if (blocks[1]) {
+        const eduSection = document.createElement('div');
+        eduSection.className = 'home-block';
+        const h4 = blocks[1].querySelector('h4');
+        if (h4) {
+            eduSection.innerHTML = '<div class="home-block-title"><i class="bi bi-mortarboard-fill"></i>' + h4.innerHTML + '</div>';
+        }
+        const ul = blocks[1].querySelector('ul');
+        if (ul) {
+            const timeline = document.createElement('div');
+            timeline.className = 'edu-timeline';
+            const lis = ul.querySelectorAll('li');
+            lis.forEach((li, i) => {
+                const item = document.createElement('div');
+                item.className = 'edu-timeline-item';
+                item.style.animationDelay = (i * 0.15) + 's';
+                item.innerHTML = '<div class="edu-dot"></div><div class="edu-content">' + li.innerHTML + '</div>';
+                timeline.appendChild(item);
+            });
+            eduSection.appendChild(timeline);
+        }
+        wrapper.appendChild(eduSection);
+    }
+
+    // Block 2: Skills -> Tag grid
+    if (blocks[2]) {
+        const skillSection = document.createElement('div');
+        skillSection.className = 'home-block';
+        const h4 = blocks[2].querySelector('h4');
+        if (h4) {
+            skillSection.innerHTML = '<div class="home-block-title"><i class="bi bi-lightning-fill"></i>' + h4.innerHTML + '</div>';
+        }
+        const ul = blocks[2].querySelector('ul');
+        if (ul) {
+            const grid = document.createElement('div');
+            grid.className = 'skill-grid';
+            const lis = ul.querySelectorAll('li');
+            lis.forEach(li => {
+                const card = document.createElement('div');
+                card.className = 'skill-card';
+                // Parse "**Label**: values" pattern
+                const html = li.innerHTML;
+                const match = html.match(/<strong>(.+?)<\/strong>:\s*(.+)/);
+                if (match) {
+                    const label = match[1];
+                    const values = match[2].split(',').map(v => v.trim());
+                    card.innerHTML = '<div class="skill-label">' + label + '</div><div class="skill-tags">' +
+                        values.map(v => '<span class="skill-tag">' + v + '</span>').join('') + '</div>';
+                } else {
+                    card.innerHTML = '<div class="skill-label">' + html + '</div>';
+                }
+                grid.appendChild(card);
+            });
+            skillSection.appendChild(grid);
+        }
+        wrapper.appendChild(skillSection);
+    }
+
+    // Block 3: Experience -> Icon cards
+    if (blocks[3]) {
+        const expSection = document.createElement('div');
+        expSection.className = 'home-block';
+        const h4 = blocks[3].querySelector('h4');
+        if (h4) {
+            expSection.innerHTML = '<div class="home-block-title"><i class="bi bi-briefcase-fill"></i>' + h4.innerHTML + '</div>';
+        }
+        const ul = blocks[3].querySelector('ul');
+        if (ul) {
+            const grid = document.createElement('div');
+            grid.className = 'exp-grid';
+            const icons = ['bi-book', 'bi-people-fill', 'bi-star-fill'];
+            const lis = ul.querySelectorAll('li');
+            lis.forEach((li, i) => {
+                const card = document.createElement('div');
+                card.className = 'exp-card';
+                card.style.animationDelay = (i * 0.1) + 's';
+                card.innerHTML = '<div class="exp-icon"><i class="bi ' + (icons[i] || 'bi-gem') + '"></i></div><div class="exp-text">' + li.innerHTML + '</div>';
+                grid.appendChild(card);
+            });
+            expSection.appendChild(grid);
+        }
+        wrapper.appendChild(expSection);
+    }
+
+    container.innerHTML = '';
+    container.appendChild(wrapper);
+}
+
+/* ============================================
+   PROJECTS POST-PROCESSING
+   ============================================ */
+function processProjects(container) {
+    const children = Array.from(container.children);
+    const wrapper = document.createElement('div');
+    wrapper.className = 'projects-wrapper';
+    let currentCard = null;
+    let projectIndex = 0;
+
+    children.forEach(child => {
+        if (child.tagName === 'H3') {
+            projectIndex++;
+            currentCard = document.createElement('div');
+            currentCard.className = 'project-card';
+            currentCard.style.animationDelay = (projectIndex * 0.15) + 's';
+            // Add project number badge
+            const badge = document.createElement('div');
+            badge.className = 'project-number';
+            badge.textContent = '0' + projectIndex;
+            currentCard.appendChild(badge);
+            wrapper.appendChild(currentCard);
+        }
+        if (currentCard) {
+            // Convert bold paragraphs to feature items
+            if (child.tagName === 'P' && child.querySelector('strong') && child.textContent.includes(':')) {
+                const featureItem = document.createElement('div');
+                featureItem.className = 'project-feature';
+                featureItem.innerHTML = '<div class="feature-dot"></div><div class="feature-content">' + child.innerHTML + '</div>';
+                currentCard.appendChild(featureItem);
+            } else {
+                currentCard.appendChild(child);
+            }
+        } else {
+            wrapper.appendChild(child);
+        }
+    });
+
+    if (wrapper.children.length > 0) {
+        container.innerHTML = '';
+        container.appendChild(wrapper);
+    }
+}
+
+/* ============================================
+   AWARDS POST-PROCESSING
+   ============================================ */
+function processAwards(container) {
+    const uls = container.querySelectorAll('ul');
+    uls.forEach(ul => {
+        ul.className = 'award-list';
+        const lis = ul.querySelectorAll('li');
+        lis.forEach((li, i) => {
+            const text = li.textContent;
+            let levelClass = 'level-other';
+            let levelText = '';
+            let content = text;
+
+            // Parse 【level】 prefix
+            const levelMatch = text.match(/【(.+?)】/);
+            if (levelMatch) {
+                levelText = levelMatch[1];
+                content = text.replace(/【.+?】/, '').trim();
+                if (levelText.includes('世界')) levelClass = 'level-world';
+                else if (levelText.includes('国家')) levelClass = 'level-national';
+                else if (levelText.includes('省')) levelClass = 'level-province';
+            }
+
+            li.className = 'award-item-wrapper';
+            li.style.animationDelay = (i * 0.08) + 's';
+            li.innerHTML = '<div class="award-item">' +
+                (levelText ? '<span class="award-level ' + levelClass + '">' + levelText + '</span>' : '') +
+                '<span class="award-text">' + content + '</span>' +
+                '</div>';
+        });
+    });
+}
+
+/* ============================================
    MAIN INIT
    ============================================ */
 window.addEventListener('DOMContentLoaded', event => {
@@ -397,38 +594,12 @@ window.addEventListener('DOMContentLoaded', event => {
                 container.innerHTML = html;
                 
                 // Post-processing for beautification
-                if (name === 'projects') {
-                    // Wrap projects in cards
-                    const children = Array.from(container.children);
-                    const newContainer = document.createElement('div');
-                    let currentCard = null;
-                    
-                    children.forEach(child => {
-                        if (child.tagName === 'H3') {
-                            currentCard = document.createElement('div');
-                            currentCard.className = 'project-card';
-                            newContainer.appendChild(currentCard);
-                        }
-                        if (currentCard) {
-                            currentCard.appendChild(child);
-                        } else {
-                            newContainer.appendChild(child);
-                        }
-                    });
-                    if (newContainer.children.length > 0) {
-                        container.innerHTML = '';
-                        container.appendChild(newContainer);
-                    }
+                if (name === 'home') {
+                    processHome(container);
+                } else if (name === 'projects') {
+                    processProjects(container);
                 } else if (name === 'awards') {
-                    // Style the awards list
-                    const uls = container.querySelectorAll('ul');
-                    uls.forEach(ul => {
-                        ul.className = 'award-list';
-                        const lis = ul.querySelectorAll('li');
-                        lis.forEach(li => {
-                            li.innerHTML = '<div class="award-item">' + li.innerHTML + '</div>';
-                        });
-                    });
+                    processAwards(container);
                 }
 
             }).then(() => {
